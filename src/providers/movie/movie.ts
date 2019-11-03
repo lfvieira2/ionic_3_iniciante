@@ -20,8 +20,6 @@ export class MovieProvider {
   }
 
   getApiKey(): string{
-    
     return "sua_api_vai_aqui";
-    
   }
 }
