@@ -34,7 +34,7 @@ import { FeedPage } from '../pages/feed/feed';
     //FeedPageModule,
     IntroPageModule,
     HttpModule,
-    HttpClientModule 
+    HttpClientModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -48,8 +48,8 @@ import { FeedPage } from '../pages/feed/feed';
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    { provide: ErrorHandler, useClass: IonicErrorHandler },
     //MovieProvider
   ]
 })
-export class AppModule {}
+export class AppModule { }
