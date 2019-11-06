@@ -11,12 +11,13 @@ import { TabsPage } from '../pages/tabs/tabs';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
-import { FeedPageModule } from '../pages/feed/feed.module';
+//import { FeedPageModule } from '../pages/feed/feed.module';
 import { IntroPageModule } from '../pages/intro/intro.module';
-import { MovieProvider } from '../providers/movie/movie';
+//import { MovieProvider } from '../providers/movie/movie';
 
 import { HttpModule } from "@angular/http";
 import { HttpClientModule } from "@angular/common/http";
+import { FeedPage } from '../pages/feed/feed';
 
 @NgModule({
   declarations: [
@@ -24,12 +25,13 @@ import { HttpClientModule } from "@angular/common/http";
     AboutPage,
     ContactPage,
     HomePage,
-    TabsPage
+    TabsPage,
+    FeedPage
   ],
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
-    FeedPageModule,
+    //FeedPageModule,
     IntroPageModule,
     HttpModule,
     HttpClientModule 
@@ -40,13 +42,14 @@ import { HttpClientModule } from "@angular/common/http";
     AboutPage,
     ContactPage,
     HomePage,
-    TabsPage
+    TabsPage,
+    FeedPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    MovieProvider
+    //MovieProvider
   ]
 })
 export class AppModule {}
