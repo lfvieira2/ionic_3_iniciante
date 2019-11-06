@@ -14,7 +14,7 @@ import { TabsPage } from '../pages/tabs/tabs';
   ]
 })
 export class MyApp {
-  rootPage: any;
+  rootPage: any; 
 
   constructor(
     platform: Platform,

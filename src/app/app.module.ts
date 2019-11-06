@@ -5,19 +5,20 @@ import { MyApp } from './app.component';
 
 import { AboutPage } from '../pages/about/about';
 import { ContactPage } from '../pages/contact/contact';
+import { FeedPage } from '../pages/feed/feed';
 import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
-//import { FeedPageModule } from '../pages/feed/feed.module';
+import { ConfiguracoesPageModule } from '../pages/configuracoes/configuracoes.module';
 import { IntroPageModule } from '../pages/intro/intro.module';
-//import { MovieProvider } from '../providers/movie/movie';
+import { PerfilPageModule } from '../pages/perfil/perfil.module';
+import { SobrePageModule } from '../pages/sobre/sobre.module';
 
 import { HttpModule } from "@angular/http";
 import { HttpClientModule } from "@angular/common/http";
-import { FeedPage } from '../pages/feed/feed';
 
 @NgModule({
   declarations: [
@@ -31,10 +32,12 @@ import { FeedPage } from '../pages/feed/feed';
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
-    //FeedPageModule,
     IntroPageModule,
     HttpModule,
-    HttpClientModule
+    HttpClientModule,
+    ConfiguracoesPageModule,
+    SobrePageModule,
+    PerfilPageModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -48,8 +51,7 @@ import { FeedPage } from '../pages/feed/feed';
   providers: [
     StatusBar,
     SplashScreen,
-    { provide: ErrorHandler, useClass: IonicErrorHandler },
-    //MovieProvider
+    { provide: ErrorHandler, useClass: IonicErrorHandler }
   ]
 })
 export class AppModule { }
