@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
 import { MovieProvider } from '../../providers/movie/movie';
+import { FilmeDetalhesPage } from '../filme-detalhes/filme-detalhes';
 
 /**
  * Generated class for the FeedPage page.
@@ -20,6 +21,11 @@ import { MovieProvider } from '../../providers/movie/movie';
 export class FeedPage {
   public nome_usuario: string = "Marty";
   public lista_filme = new Array<any>();
+  public loader;
+  public refresher;
+  public isRefreshing: boolean = false;
+  public page = 1;
+  public infiniteScroll;
 
   public objeto_feed = {
     titulo: "Marty",
@@ -33,24 +39,79 @@ export class FeedPage {
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
-    private movieProvider: MovieProvider
+    private movieProvider: MovieProvider,
+    public loadingCtrl: LoadingController
   ) {
+  }
+
+  abrirCarregando() {
+    this.loader = this.loadingCtrl.create({
+      content: "Carregando filmes..."
+    });
+    this.loader.present();
+  }
+
+  fecharCarregando() {
+    this.loader.dismiss();
   }
 
   public somaDoisNumeros(num1: number, num2: number): void {
     //alert(num1 + num2);
   }
 
-  ionViewDidLoad() {
-    this.movieProvider.getLatestMovies().subscribe(
-      data=>{
+  ionViewDidEnter() {
+    this.carregarFilmes();
+  }
+
+  doRefresh(refresher) {
+    this.refresher = refresher;
+    this.isRefreshing = true;
+
+    this.carregarFilmes();
+  }
+
+  abrirDetalhes(filme) {
+    console.log(filme);
+    this.navCtrl.push(FilmeDetalhesPage, {
+      id: filme.id
+    });
+  }
+
+  doInfinite(infiniteScroll) {
+    this.page++;
+    this.infiniteScroll = infiniteScroll;
+    this.carregarFilmes(true);
+  }
+
+  carregarFilmes(newpage: boolean = false) {
+    this.abrirCarregando();
+    this.movieProvider.getLatestMovies(this.page).subscribe(
+      data => {
         const response = (data as any);
-        this.lista_filme = response.results;
-        console.log(response);
+
+        if(newpage){
+          this.lista_filme = this.lista_filme.concat(response.results);
+          this.infiniteScroll.complete();
+        }else{
+          this.lista_filme = response.results;
+        }
+
+        this.fecharCarregando();
+
+        if (this.isRefreshing) {
+          this.refresher.complete();
+          this.isRefreshing = false;
+        }
       }, error => {
         console.log(error);
+        this.fecharCarregando();
+
+        if (this.isRefreshing) {
+          this.refresher.complete();
+          this.isRefreshing = false;
+        }
       }
-   )
+    )
   }
 
 }

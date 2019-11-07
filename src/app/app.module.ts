@@ -19,6 +19,7 @@ import { SobrePageModule } from '../pages/sobre/sobre.module';
 
 import { HttpModule } from "@angular/http";
 import { HttpClientModule } from "@angular/common/http";
+import { FilmeDetalhesPageModule } from '../pages/filme-detalhes/filme-detalhes.module';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { HttpClientModule } from "@angular/common/http";
     HttpClientModule,
     ConfiguracoesPageModule,
     SobrePageModule,
-    PerfilPageModule
+    PerfilPageModule,
+    FilmeDetalhesPageModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
